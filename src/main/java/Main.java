@@ -2,8 +2,8 @@ import handler.InputHandler;
 import handler.OutputHandler;
 import model.criteria.Criteria;
 import model.statistic.model.StatisticsInput;
-import util.SearchCriteria;
-import util.SearchResult;
+import util.search.SearchCriteria;
+import util.search.SearchResult;
 import util.StatisticsOutput;
 
 import java.io.IOException;

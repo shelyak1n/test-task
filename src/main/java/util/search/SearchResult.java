@@ -1,4 +1,4 @@
-package util;
+package util.search;
 
 import dao.DatabaseConnection;
 import model.criteria.CriteriaItem;

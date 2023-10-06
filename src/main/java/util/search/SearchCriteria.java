@@ -1,4 +1,4 @@
-package util;
+package util.search;
 
 import model.criteria.Criteria;
 import model.criteria.CriteriaItem;

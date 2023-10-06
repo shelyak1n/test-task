@@ -1,6 +1,7 @@
 package util;
 
 import dao.DatabaseConnection;
+import model.ErrorOutput;
 import model.entuty.Customer;
 import model.statistic.model.CustomerItem;
 import model.statistic.model.PurchaseItem;
@@ -126,7 +127,6 @@ public class StatisticsOutput {
             result.setCustomers(customersItem);
 
             result.setAvgExpenses(result.getTotalExpenses().divide(BigDecimal.valueOf(result.getCustomers().size()), MathContext.DECIMAL32));
-
 
         } catch (Exception e) {
             throw new RuntimeException(e);
