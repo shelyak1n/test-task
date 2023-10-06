@@ -1,7 +1,7 @@
 package util;
 
-import model.Criteria;
-import model.CriteriaItem;
+import model.criteria.Criteria;
+import model.criteria.CriteriaItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,7 +1,8 @@
 package handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Criteria;
+import model.criteria.Criteria;
+import model.statistic.model.StatisticsInput;
 
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ public class InputHandler {
         return objectMapper.readValue(json, Criteria.class);
     }
 
-//    public StatisticsInput parseStatisticsInput(String json) throws IOException {
-//        return objectMapper.readValue(json, StatisticsInput.class);
-//    }
+    public StatisticsInput parseStatisticsInput(String json) throws IOException {
+        return objectMapper.readValue(json, StatisticsInput.class);
+    }
 }

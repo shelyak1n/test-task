@@ -1,5 +1,6 @@
-package model;
+package model.search;
 
+import model.criteria.CriteriaItem;
 import model.entuty.Customer;
 
 import java.util.List;

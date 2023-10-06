@@ -1,10 +1,10 @@
 package util;
 
 import dao.DatabaseConnection;
-import model.CriteriaItem;
-import model.Result;
-import model.ResultItem;
+import model.criteria.CriteriaItem;
 import model.entuty.Customer;
+import model.search.Result;
+import model.search.ResultItem;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -51,6 +51,7 @@ public class SearchResult {
                 List<Customer> customers = new ArrayList<>();
                 while (resultSet.next()) {
                     Customer customer = new Customer();
+                    customer.setId(resultSet.getInt("id"));
                     customer.setFirstName(resultSet.getString("firstName"));
                     customer.setLastName(resultSet.getString("lastName"));
                     customers.add(customer);
@@ -60,7 +61,7 @@ public class SearchResult {
                 resultItems.add(resultItem);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         result.setResults(resultItems);
@@ -72,9 +73,9 @@ public class SearchResult {
 
     private String buildQuery(Map<String, Object> map) {
         if (map.containsKey("lastName")) {
-            return "SELECT Customers.lastName, Customers.firstName FROM Customers WHERE Customers.lastName = '" + map.get("lastName") + "'";
+            return "SELECT Customers.id, Customers.lastName, Customers.firstName FROM Customers WHERE Customers.lastName = '" + map.get("lastName") + "'";
         } else if (map.containsKey("productName") && map.containsKey("minTimes")) {
-            return "SELECT Customers.firstName, Customers.lastName " +
+            return "SELECT Customers.id, Customers.firstName, Customers.lastName " +
                     "FROM Customers " +
                     "JOIN Purchases ON Customers.id = Purchases.customerId " +
                     "JOIN Products ON Purchases.productId = Products.id " +
@@ -82,14 +83,14 @@ public class SearchResult {
                     "GROUP BY Customers.id, Customers.firstName, Customers.lastName " +
                     "HAVING COUNT(Purchases.id) >= " + map.get("minTimes");
         } else if (map.containsKey("minExpenses") && map.containsKey("maxExpenses")) {
-            return "SELECT Customers.firstName, Customers.lastName " +
+            return "SELECT Customers.id, Customers.firstName, Customers.lastName " +
                     "FROM Customers " +
                     "JOIN Purchases ON Customers.id = Purchases.id " +
                     "JOIN Products ON Purchases.id = Products.id " +
                     "GROUP BY Customers.id, Customers.firstName, Customers.lastName " +
                     "HAVING SUM(Products.price) >= " + map.get("minExpenses") + " AND SUM(Products.price) <= " + map.get("maxExpenses");
         } else if (map.containsKey("badCustomer")) {
-            return "SELECT Customers.firstName, Customers.lastName " +
+            return "SELECT Customers.id, Customers.firstName, Customers.lastName " +
                     "FROM Customers " +
                     "JOIN Purchases ON Customers.id = Purchases.id " +
                     "GROUP BY Customers.id, Customers.firstName, Customers.lastName " +

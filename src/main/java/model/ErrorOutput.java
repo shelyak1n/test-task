@@ -3,6 +3,7 @@ package model;
 public class ErrorOutput {
     private String type;
     private String message;
+
     public String getType() {
         return type;
     }

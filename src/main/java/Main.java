@@ -1,8 +1,10 @@
 import handler.InputHandler;
 import handler.OutputHandler;
-import model.Criteria;
+import model.criteria.Criteria;
+import model.statistic.model.StatisticsInput;
 import util.SearchCriteria;
 import util.SearchResult;
+import util.StatisticsOutput;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,25 +26,16 @@ public class Main {
             OutputHandler outputHandler = new OutputHandler();
 
             if ("search".equalsIgnoreCase(operation)) {
-                // получаем json из input.json
                 String jsonInput = new String(Files.readAllBytes(Paths.get(inputJsonFile)));
-                // json -> pojo
                 Criteria criteria = inputHandler.parseSearchCriteria(jsonInput);
-                // создание списка критериев
                 SearchCriteria searchCriteria = new SearchCriteria(criteria);
-                // Выполните операцию поиска с использованием criteria
                 SearchResult searchResult = new SearchResult(searchCriteria.arrayListCriteria());
-                // Запишите результат в выходной файл
                 outputHandler.writeSearchResult(outputJsonFile, searchResult.getResult());
-//            } else if ("stat".equalsIgnoreCase(operation)) {
-//                // получаем json из input.json
-//                String jsonInput = new String(Files.readAllBytes(Paths.get(inputJsonFile)));
-//                //json -> pojo
-//                StatisticsInput statisticsInput = inputHandler.parseStatisticsInput(jsonInput);
-//                // Выполните операцию статистики с использованием statisticsInput
-//                StatisticsOutput statisticsOutput = new StatisticsOutput();
-//                // Запишите результат в выходной файл
-//                outputHandler.writeStatisticsOutput(outputJsonFile, statisticsOutput);
+            } else if ("stat".equalsIgnoreCase(operation)) {
+                String jsonInput = new String(Files.readAllBytes(Paths.get(inputJsonFile)));
+                StatisticsInput statisticsInput = inputHandler.parseStatisticsInput(jsonInput);
+                StatisticsOutput statisticsOutput = new StatisticsOutput(statisticsInput);
+                outputHandler.writeStatisticsOutput(outputJsonFile, statisticsOutput.getStatisticsResult());
             } else {
                 outputHandler.writeErrorOutput(outputJsonFile, "Invalid operation");
             }

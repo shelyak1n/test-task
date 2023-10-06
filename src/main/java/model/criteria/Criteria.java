@@ -1,6 +1,5 @@
-package model;
+package model.criteria;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class Criteria {
@@ -8,9 +7,5 @@ public class Criteria {
 
     public List<CriteriaItem> getCriterias() {
         return criterias;
-    }
-
-    public void setCriterias(List<CriteriaItem> criterias) {
-        this.criterias = criterias;
     }
 }
