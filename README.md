@@ -1,14 +1,18 @@
 Установите PostgreSQL: Если у вас еще нет PostgreSQL, установите его на вашем сервере. Вы можете скачать и установить его с официального сайта PostgreSQL.
 
 Создайте базу данных:
-```createdb -h localhost -U your_username -d your_database_name```
+```
+createdb -h localhost -U your_username -d your_database_name
+```
 `-h localhost`: Укажите хост, на котором работает PostgreSQL (предполагается локальный хост).
 `-U your_username`: Укажите имя вашего пользователя PostgreSQL.
 `-d your_database_name`: Укажите имя базы данных, которое вы хотите использовать для вашего приложения.
 
 Импортируйте данные из дампа:
 
-```psql -h localhost -U your_username -d your_database_name -f dump_file.sql```
+```
+psql -h localhost -U your_username -d your_database_name -f dump_file.sql
+```
 
 `-h localhost`: Укажите хост PostgreSQL.
 `-U your_username`: Укажите ваше имя пользователя PostgreSQL.
@@ -17,10 +21,14 @@
 Запустите ваше приложение:
 
 Успользуй команду
-```mvn compile```
+```
+mvn compile
+```
 
 чтобы собрать приложение
-```java -jar <option> <input.json> <output.json>```
+```
+java -jar <option> <input.json> <output.json>
+```
 
 •	Поиск покупателей по критериям (search)
 Во входном файле передаётся список критериев для поиска покупателей. Результат операции - списки покупателей для каждого критерия из запроса. Порядок списков такой же как в запросе, порядок покупателей в списке — произвольный
@@ -38,7 +46,7 @@ input
 {
 	"criterias": [ 
 	    {"lastName": "Иванов"}, //Фамилия
-		  {"productName": "Минеральная вода", "minTimes": 5}, // Название товара и число раз
+		{"productName": "Минеральная вода", "minTimes": 5}, // Название товара и число раз
 	    {"minExpenses": 112, "maxExpenses": 4000}, //Минимальная и максимальная стоимость всех покупок
 	    {"badCustomers": 3} //Число пассивных покупателей
   ]
