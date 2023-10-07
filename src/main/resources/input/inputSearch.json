@@ -1,9 +1,7 @@
 {
   "criterias": [
-    {"lastName": "Иванов"},
     {"lastName": "Боброва"},
-    {"lastName": "Озеров"},
-    {"productName": "сыр", "minTimes": 3},
+    {"productName": "сыр", "minTimes": 1},
     {"minExpenses": 112, "maxExpenses": 4000},
     {"badCustomers": 3}
   ]
