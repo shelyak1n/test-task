@@ -1,17 +1,20 @@
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import handler.InputHandler;
 import handler.OutputHandler;
+import handler.SearchHandler;
+import handler.StatisticsHandler;
+import model.ErrorOutput;
 import model.criteria.Criteria;
-import model.statistic.model.StatisticsInput;
-import util.search.SearchCriteria;
-import util.search.SearchResult;
-import util.StatisticsOutput;
+import model.search.Result;
+import model.statistic.StatisticsInput;
+import model.statistic.StatisticsResult;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length != 3) {
             System.out.println("Usage: java -jar program.jar operation input.json output.json");
             return;
@@ -21,26 +24,31 @@ public class Main {
         String inputJsonFile = args[1];
         String outputJsonFile = args[2];
 
-        try {
-            InputHandler inputHandler = new InputHandler();
-            OutputHandler outputHandler = new OutputHandler();
+        InputHandler inputHandler = new InputHandler();
+        OutputHandler outputHandler = new OutputHandler();
 
-            if ("search".equalsIgnoreCase(operation)) {
+        if ("search".equalsIgnoreCase(operation)) {
+            try {
                 String jsonInput = new String(Files.readAllBytes(Paths.get(inputJsonFile)));
                 Criteria criteria = inputHandler.parseSearchCriteria(jsonInput);
-                SearchCriteria searchCriteria = new SearchCriteria(criteria);
-                SearchResult searchResult = new SearchResult(searchCriteria.arrayListCriteria());
-                outputHandler.writeSearchResult(outputJsonFile, searchResult.getResult());
-            } else if ("stat".equalsIgnoreCase(operation)) {
+                SearchHandler searchHandler = new SearchHandler();
+                Result searchResult = searchHandler.performSearch(criteria);
+                outputHandler.writeSearchResult(outputJsonFile, searchResult);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if ("stat".equalsIgnoreCase(operation)) {
+            try {
                 String jsonInput = new String(Files.readAllBytes(Paths.get(inputJsonFile)));
                 StatisticsInput statisticsInput = inputHandler.parseStatisticsInput(jsonInput);
-                StatisticsOutput statisticsOutput = new StatisticsOutput(statisticsInput);
-                outputHandler.writeStatisticsOutput(outputJsonFile, statisticsOutput.getStatisticsResult());
-            } else {
-                outputHandler.writeErrorOutput(outputJsonFile, "Invalid operation");
+                StatisticsHandler statisticsHandler = new StatisticsHandler();
+                StatisticsResult statisticsResult = statisticsHandler.performStatistics(statisticsInput);
+                outputHandler.writeStatisticsOutput(outputJsonFile, statisticsResult);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            outputHandler.writeErrorOutput(outputJsonFile, "Invalid operation");
         }
     }
 }

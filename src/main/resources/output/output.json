@@ -1,1 +1,85 @@
-{"type":"search","results":[{"criteria":{"lastName":"Иванов"},"results":[{"id":0,"firstName":"Иван","lastName":"Иванов"},{"id":0,"firstName":"Андрей","lastName":"Иванов"}]},{"criteria":{"productName":"Минеральная вода","minTimes":5},"results":[]},{"criteria":{"minExpenses":112,"maxExpenses":4000},"results":[]},{"criteria":{"badCustomers":3},"results":[]}]}
+{
+  "type": "stat",
+  "totalDays": 4,
+  "customers": [
+    {
+      "customer": {
+        "id": 0,
+        "firstName": "Наталья",
+        "lastName": "Боброва"
+      },
+      "purchases": [
+        {
+          "name": "сыр",
+          "totalExpensesForProduct": 600.00
+        },
+        {
+          "name": "молоко",
+          "totalExpensesForProduct": 270.00
+        },
+        {
+          "name": "хлеб",
+          "totalExpensesForProduct": 105.00
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 3,
+        "firstName": "Пётр",
+        "lastName": "Озеров"
+      },
+      "purchases": [
+        {
+          "name": "курица",
+          "totalExpensesForProduct": 300.00
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 2,
+        "firstName": "Матвей",
+        "lastName": "Зайцев"
+      },
+      "purchases": [
+        {
+          "name": "сыр",
+          "totalExpensesForProduct": 200.00
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 4,
+        "firstName": "Никита",
+        "lastName": "Морозов"
+      },
+      "purchases": [
+        {
+          "name": "молоко",
+          "totalExpensesForProduct": 90.00
+        },
+        {
+          "name": "Минеральная вода",
+          "totalExpensesForProduct": 50.00
+        }
+      ]
+    },
+    {
+      "customer": {
+        "id": 1,
+        "firstName": "Дина",
+        "lastName": "Софронова"
+      },
+      "purchases": [
+        {
+          "name": "лук",
+          "totalExpensesForProduct": 100.00
+        }
+      ]
+    }
+  ],
+  "totalExpenses": 1715.00,
+  "avgExpenses": 343.00
+}

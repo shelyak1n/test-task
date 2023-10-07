@@ -1,7 +1,9 @@
 {
   "criterias": [
     {"lastName": "Иванов"},
-    {"productName": "Минеральная вода", "minTimes": 5},
+    {"lastName": "Боброва"},
+    {"lastName": "Озеров"},
+    {"productName": "сыр", "minTimes": 3},
     {"minExpenses": 112, "maxExpenses": 4000},
     {"badCustomers": 3}
   ]

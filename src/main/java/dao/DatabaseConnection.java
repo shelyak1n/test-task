@@ -1,15 +1,25 @@
 package dao;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseConnection {
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/db";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
-
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASSWORD);
+        try (InputStream input = DatabaseConnection.class.getResourceAsStream("/db/database.properties")) {
+            Properties properties = new Properties();
+            properties.load(input);
+
+            String jdbcUrl = properties.getProperty("jdbc.url");
+            String dbUser = properties.getProperty("db.user");
+            String dbPassword = properties.getProperty("db.password");
+
+            return DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+        } catch (IOException e) {
+            throw new SQLException("Unable to load database.properties", e);
+        }
     }
 }

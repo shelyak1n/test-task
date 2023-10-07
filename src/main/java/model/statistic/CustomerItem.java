@@ -1,4 +1,4 @@
-package model.statistic.model;
+package model.statistic;
 
 import model.entuty.Customer;
 

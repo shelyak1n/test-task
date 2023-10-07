@@ -1,8 +1,9 @@
 package handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import model.criteria.Criteria;
-import model.statistic.model.StatisticsInput;
+import model.statistic.StatisticsInput;
 
 import java.io.IOException;
 

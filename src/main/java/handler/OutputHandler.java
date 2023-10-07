@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import model.ErrorOutput;
 import model.search.Result;
-import model.statistic.model.StatisticsResult;
+import model.statistic.StatisticsResult;
 
 import java.io.File;
 import java.io.IOException;
